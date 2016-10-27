@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Free pouring</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding [ngStyle]="{ background: phaseColor} ">
+
+  <h3>Free pouring</h3>
+
+
+  <button ion-button color="{{isSubscribed ? 'danger' : 'secondary'}}" (click)="toggleAccelerometer()">
+    {{ isSubscribed ? 'Unwatch' : 'Watch' }} accelerometer
+  </button>
+
+  <br>{{accX}}
+  <br>{{accY}}
+  <br>{{accZ}}
+  <br>
+  <br>
+  <div *ngFor="let item of dataArray"
+    [ngStyle]="{ background: item.isCorrectPosition ? 'green' : 'yellow' }">
+    {{item.inclination}}
+  </div>
+
+</ion-content>
