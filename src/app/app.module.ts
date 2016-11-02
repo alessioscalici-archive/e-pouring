@@ -4,11 +4,14 @@ import { MyApp } from './app.component';
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { FreePouringPage } from '../pages/free-pouring/free-pouring';
 
+import { ExactoPour } from '../components/exacto-pour/exacto-pour';
+
 @NgModule({
   declarations: [
     MyApp,
     HelloIonicPage,
-    FreePouringPage
+    FreePouringPage,
+    ExactoPour
   ],
   imports: [
     IonicModule.forRoot(MyApp)

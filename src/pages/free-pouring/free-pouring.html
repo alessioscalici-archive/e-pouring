@@ -8,14 +8,19 @@
 </ion-header>
 
 
-<ion-content padding [ngStyle]="{ background: phaseColor} ">
 
-  <h3>Free pouring</h3>
+
+<ion-content padding [ngStyle]="{ background: phaseColor} " class="has-header">
+
+  <exacto-pour ion-fixed [percent]="percent"></exacto-pour>
 
 
   <button ion-button color="{{isSubscribed ? 'danger' : 'secondary'}}" (click)="toggleAccelerometer()">
     {{ isSubscribed ? 'Unwatch' : 'Watch' }} accelerometer
   </button>
+
+  <ion-input type="number" [(ngModel)]="percent"  placeholder="Number Input with no label"></ion-input>
+
 
   <br>{{accX}}
   <br>{{accY}}
@@ -23,7 +28,7 @@
   <br>
   <br>
   <div *ngFor="let item of dataArray"
-    [ngStyle]="{ background: item.isCorrectPosition ? 'green' : 'yellow' }">
+    [ngStyle]="{ background: item.isCorrectPosition ? 'green' : 'yellow', width: '200px' }">
     {{item.inclination}}
   </div>
 

@@ -5,6 +5,7 @@ import { AccelerationData } from 'ionic-native';
 
 import { PourStats } from '../../models/pour-stats.model';
 
+
 enum PouringPhase {
     OPENING = 1,
     CLOSING,
@@ -99,9 +100,9 @@ export class FreePouringService {
 
 
         let openingTime = openingTicks * freePouringConfig.tickFrequency,
-            isGoodOpening = (openingTime <= freePouringConfig.ozQuarterDuration),
+            isGoodOpening = (openingTime <= freePouringConfig.ozQuarterDuration / 2),
             closingTime = closingTicks * freePouringConfig.tickFrequency,
-            isGoodClosing = (closingTime <= freePouringConfig.ozQuarterDuration),
+            isGoodClosing = (closingTime <= freePouringConfig.ozQuarterDuration / 2),
             wrongPositionTime = wrongPositionTicks * freePouringConfig.tickFrequency;
 
         // bubble: if opening was fast enough
@@ -111,7 +112,8 @@ export class FreePouringService {
 
         let quantity = quantityTime / freePouringConfig.ozQuarterDuration / 4;
 
-        let quantityIndex = Math.round(quantityTime / freePouringConfig.ozQuarterDuration);
+       // let quantityIndex = Math.round(quantityTime / freePouringConfig.ozQuarterDuration);
+        let quantityIndex = Math.max(0, Math.round(quantityTime / freePouringConfig.ozQuarterDuration) - 1);
 
         let quantityLabels = ['1/4', '1/2', '3/4', '1', '1 1/4', '1 1/2', '1 3/4', '2'];
         let quantityText = quantityIndex < quantityLabels.length ? quantityLabels[quantityIndex] : '> 2 oz';
@@ -122,7 +124,7 @@ export class FreePouringService {
             isGoodOpening: isGoodOpening,
             closingTime: closingTime,
             isGoodClosing: isGoodClosing,
-            totalTime: totalTime,
+            totalTime: quantityTime,
             quantity: quantity,
             quantityText: quantityText,
             bubbleHappened: isGoodOpening,

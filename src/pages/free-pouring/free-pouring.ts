@@ -7,6 +7,7 @@ import { FreePouringService } from './free-pouring.service';
 
 
 @Component({
+    selector: 'free-pouring-page',
     templateUrl: 'free-pouring.html',
     providers: [FreePouringService]
 })
@@ -16,6 +17,7 @@ export class FreePouringPage {
     subscription: Subscription;
     isSubscribed: boolean;
     phaseColor: string;
+    percent: number;
 
     // FIXME debug
     accX: Number;
@@ -29,6 +31,7 @@ export class FreePouringPage {
 
 
     toggleAccelerometer () {
+
 
         // FIXME DEBUGGING SUBSCRIPTION
         if (this.isSubscribed) {
@@ -75,8 +78,14 @@ export class FreePouringPage {
                 text += stats.wrongPositionTime > 0 ? 'You was in a bad position for: ' + stats.wrongPositionTime + ' ms. BAD\n' : '';
                 text += 'Measure: ' + stats.quantityText + ' (' + stats.quantity.toFixed(2) + ')\n';
             }
-            alert(text);
 
+            text += 'Total: ' + stats.totalTime + '\n';
+
+            let percent = stats.quantity / 2 * 100;
+            this.percent = Math.round(Math.min(percent, 110));
+            text += 'Percent: ' + this.percent;
+
+            alert(text);
         } );
     }
 
