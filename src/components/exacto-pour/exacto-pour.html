@@ -1,6 +1,10 @@
-
-<div class="meas"
-  *ngFor="let meas of measures">
-  {{meas}} oz
+<div class="meas-top"></div>
+<div class="meas-container">
+  <div class="meas"
+       *ngFor="let meas of measures">
+    <div class="label">{{meas}} oz</div>
+    <div class="dashed"></div>
+  </div>
+  <section class="liquid" [ngStyle]="{ height: percent + '%'}"></section>
 </div>
-<section class="liquid" [ngStyle]="{ height: percent + '%'}"></section>
+
