@@ -1,6 +1,10 @@
 <ion-content padding [ngStyle]="{ background: phaseColor} " class="has-header">
 
-  <exacto-pour ion-fixed [quantity]="quantity"></exacto-pour>
+  <exacto-pour
+    ion-fixed
+    [quantity]="quantity"
+    [ngClass]="{ shifted: isPouring }"
+    ></exacto-pour>
 
 
   <button ion-button color="{{isSubscribed ? 'danger' : 'secondary'}}" (click)="toggleAccelerometer()">

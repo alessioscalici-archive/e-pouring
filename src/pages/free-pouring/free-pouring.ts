@@ -15,11 +15,12 @@ import { FreePouringService } from './free-pouring.service';
 })
 export class FreePouringPage extends Locale {
 
-
-    subscription: Subscription;
-    isSubscribed: boolean;
-    phaseColor: string;
-    quantity: number;
+    startPouringSub: Subscription;
+    stopPouringSub: Subscription;
+    isSubscribed: Boolean;
+    isPouring: Boolean;
+    phaseColor: String;
+    quantity: Number;
 
 
 
@@ -38,55 +39,53 @@ export class FreePouringPage extends Locale {
         // FIXME DEBUGGING SUBSCRIPTION
         if (this.isSubscribed) {
             this.isSubscribed = false;
-            this.subscription.unsubscribe();
-        } else  {
+            this.startPouringSub.unsubscribe();
+            this.stopPouringSub.unsubscribe();
+        } else {
             this.isSubscribed = true;
 
-            let that = this;
 
-            this.subscription = DeviceMotion.watchAcceleration({frequency: 50}).subscribe((acceleration:AccelerationData) => {
+            this.startPouringSub = this.freePouringService.watchStartPouring().subscribe(() => {
 
+                this.phaseColor = 'green';
+                this.isPouring = true;
 
-                if (acceleration.y > 0) {
-                    this.phaseColor = 'white';
-                } else if (acceleration.y >= -6.5) {
-                    this.phaseColor = 'yellow';
+            });
+
+            this.stopPouringSub = this.freePouringService.watchStopPouring().subscribe((stats) => {
+
+                // FIXME pick another phase indicator
+                this.phaseColor = 'white';
+                this.isPouring = false;
+
+                let text = '';
+
+                // never been in right position
+                if (stats.isTotalWrongPosition) {
+                    text += this.localization.translate('freePouring.youPoured', stats) + '\n';
+                    text += this.localization.translate('freePouring.wrongInclination') + '\n';
                 } else {
-                    this.phaseColor = 'green';
+
+                    text += this.localization.translate('freePouring.youPoured', stats) + '\n';
+                    text += this.localization.translate(
+                            stats.isGoodOpening ? 'freePouring.goodOpening' : 'freePouring.badOpening',
+                            stats) + '\n';
+                    text += this.localization.translate(
+                            stats.isGoodClosing ? 'freePouring.goodClosing' : 'freePouring.badClosing',
+                            stats) + '\n';
+
+                    text += stats.bubbleHappened ?
+                    this.localization.translate('freePouring.bubbleHappened') + '\n' :
+                        '';
                 }
 
+                this.quantity = stats.quantity;
+
+                alert(text);
             });
         }
 
-
-        this.freePouringService.toggleAccelerometer( (stats) => {
-
-
-            let text = '';
-
-            // never been in right position
-            if (stats.isTotalWrongPosition) {
-                text += this.localization.translate('freePouring.youPoured', stats) + '\n';
-                text += this.localization.translate('freePouring.wrongInclination') + '\n';
-            } else {
-
-                text += this.localization.translate('freePouring.youPoured', stats) + '\n';
-                text += this.localization.translate(
-                    stats.isGoodOpening ? 'freePouring.goodOpening' : 'freePouring.badOpening',
-                    stats) + '\n';
-                text += this.localization.translate(
-                    stats.isGoodClosing ? 'freePouring.goodClosing' : 'freePouring.badClosing',
-                    stats) + '\n';
-
-                text += stats.bubbleHappened ?
-                    this.localization.translate('freePouring.bubbleHappened') + '\n' :
-                    '';
-            }
-
-            this.quantity = stats.quantity;
-
-            alert(text);
-        } );
+        this.freePouringService.toggleAccelerometer();
     }
 
 }

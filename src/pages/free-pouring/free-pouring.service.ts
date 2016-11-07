@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { DeviceMotion } from 'ionic-native';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription'
 import { AccelerationData } from 'ionic-native';
 
 import { PourStats } from '../../models/pour-stats.model';
@@ -28,6 +28,11 @@ export class FreePouringService {
 
     private subscription: Subscription;
     private isSubscribed: boolean;
+
+    // EVENTS
+    private eeStartPouring: EventEmitter<any> = new EventEmitter<any>();
+    private eeStopPouring: EventEmitter<PourStats> = new EventEmitter<PourStats>();
+
 
 
     public calculateData (baseArray) :Array<any> {
@@ -136,7 +141,7 @@ export class FreePouringService {
     }
 
 
-    public toggleAccelerometer (callback) :boolean {
+    public toggleAccelerometer () :Boolean {
 
         if (this.isSubscribed) {
             this.isSubscribed = false;
@@ -156,6 +161,7 @@ export class FreePouringService {
                 if (acceleration.y < 0) {
                     if (!pouring) {
                         pouring = true;
+                        this.eeStartPouring.emit();
                     }
 
                     pourArray.push(acceleration.y);
@@ -164,12 +170,21 @@ export class FreePouringService {
                     pouring = false;
                     let stats = this.getStats(this.calculateData(pourArray));
                     pourArray = [];
-                    callback(stats);
+
+                    this.eeStopPouring.emit(stats);
                 }
             });
         return true;
 
     }
 
+
+    public watchStopPouring () : EventEmitter<PourStats> {
+        return this.eeStopPouring;
+    }
+
+    public watchStartPouring () : EventEmitter<any> {
+        return this.eeStartPouring;
+    }
 
 }

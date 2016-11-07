@@ -2,6 +2,12 @@ free-pouring-page {
 
   exacto-pour {
     right: 0;
+    transition: right 500ms;
+
+    &.shifted {
+      right: -60px;
+      transition: right 500ms;
+    }
   }
 
 }
