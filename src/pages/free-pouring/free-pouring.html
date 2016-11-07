@@ -1,24 +1,14 @@
 <ion-content padding [ngStyle]="{ background: phaseColor} " class="has-header">
 
-  <exacto-pour ion-fixed [percent]="percent"></exacto-pour>
+  <exacto-pour ion-fixed [quantity]="quantity"></exacto-pour>
 
 
   <button ion-button color="{{isSubscribed ? 'danger' : 'secondary'}}" (click)="toggleAccelerometer()">
     {{ isSubscribed ? 'Unwatch' : 'Watch' }} accelerometer
   </button>
 
-  <ion-input type="number" [(ngModel)]="percent"  placeholder="Number Input with no label"></ion-input>
+  <ion-input type="number" [(ngModel)]="quantity"  placeholder="Number Input with no label"></ion-input>
 
-  pippo {{ 'test' | translate:lang }}
-
-  <br>{{accX}}
-  <br>{{accY}}
-  <br>{{accZ}}
-  <br>
-  <br>
-  <div *ngFor="let item of dataArray"
-    [ngStyle]="{ background: item.isCorrectPosition ? 'green' : 'yellow', width: '200px' }">
-    {{item.inclination}}
-  </div>
+  {{'freePouring.bubbleHappened'|translate:lang}}
 
 </ion-content>

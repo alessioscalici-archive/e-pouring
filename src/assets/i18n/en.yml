@@ -1,0 +1,8 @@
+freePouring:
+  badClosing: Closing too slow ({{closingTime}} ms)
+  badOpening: Opening too slow ({{openingTime}} ms)
+  bubbleHappened: Bubble happened
+  goodClosing: Closing ok ({{closingTime}} ms)
+  goodOpening: Opening ok ({{openingTime}} ms)
+  wrongInclination: Wrong inclination
+  youPoured: You poured {{quantityText}} oz

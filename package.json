@@ -6,7 +6,9 @@
   "scripts": {
     "build": "ionic-app-scripts build",
     "watch": "ionic-app-scripts watch",
+    "lang": "node ./scripts/lang.js",
     "serve:before": "watch",
+    "serve:after": "lang",
     "emulate:before": "build",
     "deploy:before": "build",
     "build:before": "build",
@@ -32,7 +34,8 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "0.0.39",
-    "typescript": "2.0.6"
+    "typescript": "2.0.6",
+    "yamljs": "^0.2.8"
   },
   "description": "pippo2: An Ionic project",
   "cordovaPlugins": [

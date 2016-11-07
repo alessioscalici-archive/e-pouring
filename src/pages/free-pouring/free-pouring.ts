@@ -19,13 +19,10 @@ export class FreePouringPage extends Locale {
     subscription: Subscription;
     isSubscribed: boolean;
     phaseColor: string;
-    percent: number;
+    quantity: number;
 
-    // FIXME debug
-    accX: Number;
-    accY: Number;
-    accZ: Number;
-    dataArray: any;
+
+
 
     constructor(
         private freePouringService: FreePouringService,
@@ -49,9 +46,6 @@ export class FreePouringPage extends Locale {
 
             this.subscription = DeviceMotion.watchAcceleration({frequency: 50}).subscribe((acceleration:AccelerationData) => {
 
-                that.accX = acceleration.x;
-                that.accY = acceleration.y;
-                that.accZ = acceleration.z;
 
                 if (acceleration.y > 0) {
                     this.phaseColor = 'white';
@@ -68,27 +62,28 @@ export class FreePouringPage extends Locale {
         this.freePouringService.toggleAccelerometer( (stats) => {
 
 
-            this.dataArray = stats.data;
-
             let text = '';
 
             // never been in right position
             if (stats.isTotalWrongPosition) {
-                text += 'You was in a wrong position for: ' + stats.totalTime + ' ms. BAD\n';
-                text += 'Measure: ' + stats.quantityText + ' (' + stats.quantity.toFixed(2) + ')\n';
+                text += this.localization.translate('freePouring.youPoured', stats) + '\n';
+                text += this.localization.translate('freePouring.wrongInclination') + '\n';
             } else {
-                text += 'Opening: ' + stats.openingTime + ' ms. ' + (stats.isGoodOpening ? 'GOOD' : 'BAD') + '\n';
-                text += 'Closing: ' + stats.closingTime + ' ms. ' + (stats.isGoodClosing ? 'GOOD' : 'BAD') + '\n';
-                text += stats.bubbleHappened ? 'Bubble happened\n' : '';
-                text += stats.wrongPositionTime > 0 ? 'You was in a bad position for: ' + stats.wrongPositionTime + ' ms. BAD\n' : '';
-                text += 'Measure: ' + stats.quantityText + ' (' + stats.quantity.toFixed(2) + ')\n';
+
+                text += this.localization.translate('freePouring.youPoured', stats) + '\n';
+                text += this.localization.translate(
+                    stats.isGoodOpening ? 'freePouring.goodOpening' : 'freePouring.badOpening',
+                    stats) + '\n';
+                text += this.localization.translate(
+                    stats.isGoodClosing ? 'freePouring.goodClosing' : 'freePouring.badClosing',
+                    stats) + '\n';
+
+                text += stats.bubbleHappened ?
+                    this.localization.translate('freePouring.bubbleHappened') + '\n' :
+                    '';
             }
 
-            text += 'Total: ' + stats.totalTime + '\n';
-
-            let percent = stats.quantity / 2 * 100;
-            this.percent = Math.round(Math.min(percent, 110));
-            text += 'Percent: ' + this.percent;
+            this.quantity = stats.quantity;
 
             alert(text);
         } );
