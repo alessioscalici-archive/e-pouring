@@ -3,6 +3,8 @@ import { DeviceMotion } from 'ionic-native';
 import { Subscription } from 'rxjs/Subscription';
 import { AccelerationData } from 'ionic-native';
 
+import { Locale, LocalizationService } from 'angular2localization';
+
 import { FreePouringService } from './free-pouring.service';
 
 
@@ -11,7 +13,7 @@ import { FreePouringService } from './free-pouring.service';
     templateUrl: 'free-pouring.html',
     providers: [FreePouringService]
 })
-export class FreePouringPage {
+export class FreePouringPage extends Locale {
 
 
     subscription: Subscription;
@@ -25,8 +27,11 @@ export class FreePouringPage {
     accZ: Number;
     dataArray: any;
 
-    constructor(private freePouringService :FreePouringService) {
+    constructor(
+        private freePouringService: FreePouringService,
+        public localization: LocalizationService) {
 
+        super(null, localization);
     }
 
 
