@@ -6,6 +6,7 @@ import { AccelerationData } from 'ionic-native';
 import { Locale, LocalizationService } from 'angular2localization';
 
 import { FreePouringService } from './free-pouring.service';
+import { PourStats } from '../../models/pour-stats.model';
 
 
 @Component({
@@ -19,10 +20,8 @@ export class FreePouringPage extends Locale {
     stopPouringSub: Subscription;
     isSubscribed: Boolean;
     isPouring: Boolean;
-    phaseColor: String;
     quantity: Number;
-
-
+    stats: PourStats;
 
 
     constructor(
@@ -36,7 +35,6 @@ export class FreePouringPage extends Locale {
     toggleAccelerometer () {
 
 
-        // FIXME DEBUGGING SUBSCRIPTION
         if (this.isSubscribed) {
             this.isSubscribed = false;
             this.startPouringSub.unsubscribe();
@@ -47,15 +45,14 @@ export class FreePouringPage extends Locale {
 
             this.startPouringSub = this.freePouringService.watchStartPouring().subscribe(() => {
 
-                this.phaseColor = 'green';
                 this.isPouring = true;
+                this.quantity = 0;
 
             });
 
             this.stopPouringSub = this.freePouringService.watchStopPouring().subscribe((stats) => {
 
-                // FIXME pick another phase indicator
-                this.phaseColor = 'white';
+                this.stats = stats;
                 this.isPouring = false;
 
                 let text = '';

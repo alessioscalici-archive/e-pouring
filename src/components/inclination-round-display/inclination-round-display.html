@@ -1,0 +1,15 @@
+<div
+  class="circle"
+  [ngClass]="{ 'correct-inclination': isCorrectInclination, 'wrong-inclination': isWrongInclination, 'left-hand': leftHand }">
+  <div
+    class="lines-group"
+    [ngStyle]="{transform: 'rotate(' + inclination + 'rad)', '-webkit-transform': 'rotate(' + inclination + 'rad)'}">
+    <div class="inclination-limit-line left"></div>
+    <div class="inclination-limit-line right"></div>
+    <div class="central-line"></div>
+    <div class="horizontal-line"></div>
+  </div>
+  <div class="bottle-line"></div>
+</div>
+
+{{inclination}}

@@ -1,9 +1,10 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { DeviceMotion } from 'ionic-native';
 import { Subscription } from 'rxjs/Subscription'
 import { AccelerationData } from 'ionic-native';
 
 import { PourStats } from '../../models/pour-stats.model';
+import { AppConfig } from '../../app/app-config.service';
 
 
 enum PouringPhase {
@@ -13,15 +14,6 @@ enum PouringPhase {
     POURING
 }
 
-/**
- * FIXME move it in a config object
- */
-let freePouringConfig = {
-    tickFrequency: 50,
-    bubbleDuration: 50,
-    ozQuarterDuration: 350,
-    maximumCorrectInclination: -6.5
-};
 
 @Injectable()
 export class FreePouringService {
@@ -35,10 +27,17 @@ export class FreePouringService {
 
 
 
+
     public calculateData (baseArray) :Array<any> {
         let neverCorrectPosition = true;
         let newArray =  baseArray.map(function (inclination) {
-            let isCorrectPosition = inclination < freePouringConfig.maximumCorrectInclination;
+
+            //let isCorrectPosition = inclination < AppConfig.pouring.maximumCorrectInclination;
+
+            let isCorrectPosition =
+                (inclination >= AppConfig.pouring.inclination.correct.min &&
+                inclination <= AppConfig.pouring.inclination.correct.max);
+
             neverCorrectPosition = neverCorrectPosition && !isCorrectPosition;
             return {
                 inclination: inclination,
@@ -94,9 +93,9 @@ export class FreePouringService {
             pouringTicks = dataArray.reduce( countPhase(PouringPhase.POURING), 0 );
 
 
-        let totalTime = dataArray.length * freePouringConfig.tickFrequency,
-            fullTime = freePouringConfig.tickFrequency,
-            halfTime = freePouringConfig.tickFrequency / 2,
+        let totalTime = dataArray.length * AppConfig.pouring.tickFrequency,
+            fullTime = AppConfig.pouring.tickFrequency,
+            halfTime = AppConfig.pouring.tickFrequency / 2,
             quantityTime =
                 (openingTicks * halfTime) +
                 (closingTicks * halfTime) +
@@ -104,21 +103,21 @@ export class FreePouringService {
                 (pouringTicks * fullTime);
 
 
-        let openingTime = openingTicks * freePouringConfig.tickFrequency,
-            isGoodOpening = (openingTime <= freePouringConfig.ozQuarterDuration / 2),
-            closingTime = closingTicks * freePouringConfig.tickFrequency,
-            isGoodClosing = (closingTime <= freePouringConfig.ozQuarterDuration / 2),
-            wrongPositionTime = wrongPositionTicks * freePouringConfig.tickFrequency;
+        let openingTime = openingTicks * AppConfig.pouring.tickFrequency,
+            isGoodOpening = (openingTime <= AppConfig.pouring.ozQuarterDuration / 2),
+            closingTime = closingTicks * AppConfig.pouring.tickFrequency,
+            isGoodClosing = (closingTime <= AppConfig.pouring.ozQuarterDuration / 2),
+            wrongPositionTime = wrongPositionTicks * AppConfig.pouring.tickFrequency;
 
         // bubble: if opening was fast enough
         if (isGoodOpening) {
-            quantityTime -= freePouringConfig.bubbleDuration;
+            quantityTime -= AppConfig.pouring.bubbleDuration;
         }
 
-        let quantity = quantityTime / freePouringConfig.ozQuarterDuration / 4;
+        let quantity = quantityTime / AppConfig.pouring.ozQuarterDuration / 4;
 
-       // let quantityIndex = Math.round(quantityTime / freePouringConfig.ozQuarterDuration);
-        let quantityIndex = Math.max(0, Math.round(quantityTime / freePouringConfig.ozQuarterDuration) - 1);
+       // let quantityIndex = Math.round(quantityTime / AppConfig.pouring.ozQuarterDuration);
+        let quantityIndex = Math.max(0, Math.round(quantityTime / AppConfig.pouring.ozQuarterDuration) - 1);
 
         let quantityLabels = ['1/4', '1/2', '3/4', '1', '1 1/4', '1 1/2', '1 3/4', '2'];
         let quantityText = quantityIndex < quantityLabels.length ? quantityLabels[quantityIndex] : '> 2 oz';
@@ -155,18 +154,19 @@ export class FreePouringService {
         let pourArray = [];
 
 
-        this.subscription = DeviceMotion.watchAcceleration({frequency: freePouringConfig.tickFrequency})
-            .subscribe((acceleration:AccelerationData) => {
+        this.subscription = DeviceMotion.watchAcceleration({frequency: AppConfig.pouring.tickFrequency})
+            .subscribe((acc:AccelerationData) => {
 
-                if (acceleration.y < 0) {
+                if (acc.y < 0) {
                     if (!pouring) {
                         pouring = true;
                         this.eeStartPouring.emit();
                     }
 
-                    pourArray.push(acceleration.y);
+                    let norm = Math.sqrt(acc.x * acc.x + acc.y * acc.y + acc.z * acc.z);
+                    pourArray.push(Math.acos(acc.y / norm));
 
-                } else if (pouring && acceleration.y >= 0) {
+                } else if (pouring && acc.y >= 0) {
                     pouring = false;
                     let stats = this.getStats(this.calculateData(pourArray));
                     pourArray = [];

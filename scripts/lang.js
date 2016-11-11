@@ -13,8 +13,13 @@ var
 var files = fs.readdirSync('src/assets/i18n/');
 
 files.forEach(function(ymlFile) {
-  var obj = YAML.load(I18N_SRC_DIR + ymlFile);
-  var jsonFile = ymlFile.replace('.yml','.json');
-  fs.writeFileSync(I18N_DST_DIR + jsonFile, JSON.stringify(obj),  'utf8');
-  fs.unlinkSync(I18N_DST_DIR + ymlFile);
+  try {
+    var obj = YAML.load(I18N_SRC_DIR + ymlFile);
+    var jsonFile = ymlFile.replace('.yml','.json');
+    fs.writeFileSync(I18N_DST_DIR + jsonFile, JSON.stringify(obj),  'utf8');
+    fs.unlinkSync(I18N_DST_DIR + ymlFile);
+  } catch (e) {
+
+  }
+
 });

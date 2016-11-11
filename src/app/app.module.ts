@@ -3,17 +3,21 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { LocaleModule, LocalizationModule } from 'angular2localization';
 
 import { MyApp } from './app.component';
-import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
+import { MainPage } from '../pages/main/main';
 import { FreePouringPage } from '../pages/free-pouring/free-pouring';
 
 import { ExactoPour } from '../components/exacto-pour/exacto-pour';
+import { InclinationRoundDisplay } from '../components/inclination-round-display/inclination-round-display';
+import { PourReportText } from '../components/pour-report-text/pour-report-text';
 
 @NgModule({
   declarations: [
     MyApp,
-    HelloIonicPage,
+    MainPage,
     FreePouringPage,
-    ExactoPour
+    ExactoPour,
+    InclinationRoundDisplay,
+    PourReportText
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -23,7 +27,7 @@ import { ExactoPour } from '../components/exacto-pour/exacto-pour';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HelloIonicPage,
+    MainPage,
     FreePouringPage
   ],
   providers: []

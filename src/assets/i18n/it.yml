@@ -6,3 +6,6 @@ freePouring:
   goodOpening: Apertura ok ({{openingTime}} ms)
   wrongInclination: Inclinazione sbagliata
   youPoured: Hai versato {{quantityText}} oz
+pages:
+  main: Bar App
+  freePouring: Free pouring

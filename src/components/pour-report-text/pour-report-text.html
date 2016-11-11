@@ -1,0 +1,38 @@
+<ion-card>
+
+  <ion-card-header>
+    Pour results
+  </ion-card-header>
+
+  <ion-card-content *ngIf="stats">
+
+    <div>
+      <span>You poured</span>
+      <span color="info">{{stats.quantityText}} oz</span>
+    </div>
+
+    <div>
+      <span>Opening</span>
+      <span color="{{ stats.isGoodOpening ? 'success' : 'failure' }}">
+        {{stats.isGoodOpening ? 'GOOD' : 'BAD'}} ({{stats.openingTime}} ms)
+      </span>
+      <ion-icon
+        name="{{ stats.isGoodOpening ? 'checkmark-circle' : 'close-circle' }}"
+        color="{{ stats.isGoodOpening ? 'success' : 'failure' }}">
+      </ion-icon>
+    </div>
+
+    <div>
+      <span>Closing</span>
+      <span color="{{ stats.isGoodClosing ? 'success' : 'failure' }}">
+        {{stats.isGoodClosing ? 'GOOD' : 'BAD'}} ({{stats.closingTime}} ms)
+      </span>
+      <ion-icon
+        name="{{ stats.isGoodClosing ? 'checkmark-circle' : 'close-circle' }}"
+        color="{{ stats.isGoodClosing ? 'success' : 'failure' }}">
+      </ion-icon>
+    </div>
+
+  </ion-card-content>
+
+</ion-card>

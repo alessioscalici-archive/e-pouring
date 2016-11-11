@@ -1,0 +1,80 @@
+inclination-round-display {
+
+  $circle-diameter: 200px;
+  $border-width: 3px;
+  $circle-radius-no-border: ($circle-diameter / 2 - $border-width);
+  $line-rotation: 0.5235987755982988rad;
+
+
+  .circle {
+    position: relative;
+    width: $circle-diameter;
+    height: $circle-diameter;
+    border-radius: 100%;
+    overflow: hidden;
+    border: $border-width solid grey;
+    background: rgba(0, 0, 0, 0.1);
+
+    &.correct-inclination {
+      border-color: green;
+      background: rgba(0, 255, 0, 0.1);
+    }
+    &.wrong-inclination {
+      border-color: red;
+      background: rgba(255, 0, 0, 0.1);
+    }
+
+    &.left-hand {
+      transform: rotateY(180deg);
+    }
+  }
+
+  .lines-group {
+    width: 100%;
+    height: 100%;
+    transition: transform 120ms;
+  }
+
+  .bottle-line {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background: #ff0000;
+    left: 50%;
+    top: $circle-radius-no-border;
+    transform-origin: top;
+  }
+
+  .inclination-limit-line {
+    position: absolute;
+    width: 1px;
+    height: $circle-radius-no-border;
+    background: #333333;
+    left: $circle-radius-no-border;
+    transform-origin: bottom;
+
+    &.left {
+      transform: rotate(-$line-rotation);
+    }
+    &.right {
+      transform: rotate($line-rotation);
+    }
+  }
+
+  .central-line {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background: #666666;
+    left: $circle-radius-no-border;
+  }
+
+  .horizontal-line {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: #666666;
+    top: $circle-radius-no-border;
+  }
+
+}

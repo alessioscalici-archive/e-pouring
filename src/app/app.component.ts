@@ -3,8 +3,9 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 import { LocaleService, LocalizationService } from 'angular2localization';
+import { Observable } from 'rxjs/Rx';
 
-import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
+import { MainPage } from '../pages/main/main';
 import { FreePouringPage } from '../pages/free-pouring/free-pouring';
 
 
@@ -15,7 +16,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  rootPage: any = FreePouringPage;
+  rootPage: any = MainPage;
   pages: Array<{title: string, component: any}>;
 
   constructor(
@@ -25,11 +26,37 @@ export class MyApp {
     public localization: LocalizationService
   ) {
     this.initializeApp();
+    this.initializePages();
+    this.initializeTranslation();
+  }
 
-    platform.ready().then(() => {
+
+  initializePages() {
+
+    this.localization.translationChanged.subscribe(() => {
+      this.pages = [
+        {
+          title: this.localization.translate('pages.main'),
+          component: MainPage
+        },
+        {
+          title: this.localization.translate('pages.freePouring'),
+          component: FreePouringPage
+        }
+      ];
+    });
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-     // ...
+      StatusBar.styleDefault();
+    });
+  }
+
+  initializeTranslation() {
+    this.platform.ready().then(() => {
 
       // Adds a new language (ISO 639 two-letter or three-letter code).
       this.locale.addLanguage('en');
@@ -44,24 +71,14 @@ export class MyApp {
 
       // Initializes LocalizationService: asynchronous loading.
       this.localization.translationProvider('./assets/i18n/'); // Required: initializes the translation provider with the given path prefix.
+
+
       this.localization.updateTranslation(); // Need to update the translation.
+
 
       let lang = (navigator.language && navigator.language.split('-')[0]) || 'en';
       this.locale.setCurrentLanguage(lang);
-    });
 
-    // set our app's pages
-    this.pages = [
-      { title: 'Hello Ionic', component: HelloIonicPage },
-      { title: 'Free Pouring Page', component: FreePouringPage }
-    ];
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
     });
   }
 
