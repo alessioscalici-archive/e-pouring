@@ -19,7 +19,7 @@ files.forEach(function(ymlFile) {
     fs.writeFileSync(I18N_DST_DIR + jsonFile, JSON.stringify(obj),  'utf8');
     fs.unlinkSync(I18N_DST_DIR + ymlFile);
   } catch (e) {
-
+    console.log(e);
   }
 
 });

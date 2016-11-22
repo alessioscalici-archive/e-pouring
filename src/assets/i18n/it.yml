@@ -20,4 +20,8 @@ pourReport:
 pourTestPage:
   pour: Versa {{measure}} oz
   testResults: Risultati
-  welcome: Benvenuto al pour test. Mettiti in posizione, e premi play per cominciare!
+  welcome: >
+           Benvenuto al pour test.
+           Dovrai versare la quantità richiesta, per 7 volte.
+           Conoscerai l'esito del test solamente alla fine.
+           Mettiti in posizione, e premi play per cominciare!

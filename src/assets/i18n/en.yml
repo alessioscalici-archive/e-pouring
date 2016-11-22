@@ -20,4 +20,8 @@ pourReport:
 pourTestPage:
   pour: Please pour {{measure}} oz
   testResults: Test Results
-  welcome: Welcome to the pour test. Take position, and press play to begin!
+  welcome: >
+           Welcome to the pour test.
+           You'll be asked to pour a specific quantity for 7 times.
+           You'll know the result after the whole test is done.
+           Take position, and press play to begin!

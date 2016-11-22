@@ -1,9 +1,15 @@
-.main-page {
 
-  p {
-    margin: 20px 0;
-    line-height: 22px;
-    font-size: 16px;
+
+
+main-page {
+
+  h1 {
+    font-family: Pacifico, monospace;
   }
 
+  .pippo {
+    width: 100px;
+    height: 100px;
+    background-image: url('../assets/img/pic.jpg');
+  }
 }

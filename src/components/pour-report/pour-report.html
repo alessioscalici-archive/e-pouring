@@ -3,6 +3,11 @@
   <ion-card-content>
 
     <div>
+      <ion-icon
+        name="{{ test.isCorrect() ? 'checkmark-circle' : 'close-circle' }}"
+        color="{{ test.isCorrect() ? 'success' : 'failure' }}"
+        ></ion-icon>
+
       <b>{{test.measure.description}} oz</b>
     </div>
     <ion-grid>
