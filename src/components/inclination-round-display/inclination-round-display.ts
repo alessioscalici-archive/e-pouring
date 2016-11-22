@@ -32,35 +32,37 @@ export class InclinationRoundDisplay {
         if (!DeviceMotion) {
             return;
         }
+        this.platform.ready().then(() => {
+            // FIXME frequency to config
+            this.subscription = DeviceMotion.watchAcceleration({frequency: 50})
+                .subscribe((a:AccelerationData) => {
 
-        // FIXME frequency to config
-        this.subscription = DeviceMotion.watchAcceleration({frequency: 50})
-            .subscribe((a:AccelerationData) => {
-
-                // we won't consider the z axis in normalization
-                // Math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
-                let norm = Math.sqrt(a.x * a.x + a.y * a.y);
-                // normalized vector
-                //   let n = {
-                //       x: a.x / norm,
-                //       y: a.y / norm,
-                //       z: a.z / norm,
-                //   };
-
-
-                let incl = Math.acos(a.y / norm);
-
-                // round to smoothen animation
-                this.inclination = +incl.toFixed(2);
-
-                // FIXME inclinations to config
-                this.isCorrectInclination = (this.inclination >= Math.PI - (Math.PI / 6));
-                this.isWrongInclination = !this.isCorrectInclination && (this.inclination >= (Math.PI / 2));
-
-                this.leftHand = (a.x < 0);
+                    // we won't consider the z axis in normalization
+                    // Math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
+                    let norm = Math.sqrt(a.x * a.x + a.y * a.y);
+                    // normalized vector
+                    //   let n = {
+                    //       x: a.x / norm,
+                    //       y: a.y / norm,
+                    //       z: a.z / norm,
+                    //   };
 
 
-            });
+                    let incl = Math.acos(a.y / norm);
+
+                    // round to smoothen animation
+                    this.inclination = +incl.toFixed(2);
+
+                    // FIXME inclinations to config
+                    this.isCorrectInclination = (this.inclination >= Math.PI - (Math.PI / 6));
+                    this.isWrongInclination = !this.isCorrectInclination && (this.inclination >= (Math.PI / 2));
+
+                    this.leftHand = (a.x < 0);
+
+
+                });
+        });
+
     }
 
     private deactivate() {

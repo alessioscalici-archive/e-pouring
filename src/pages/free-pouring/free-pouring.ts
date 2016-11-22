@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { DeviceMotion } from 'ionic-native';
+import { DeviceMotion, AccelerationData } from 'ionic-native';
 import { Subscription } from 'rxjs/Subscription';
-import { AccelerationData } from 'ionic-native';
 
 import { Locale, LocalizationService } from 'angular2localization';
 
@@ -26,7 +25,8 @@ export class FreePouringPage extends Locale {
 
     constructor(
         private freePouringService: FreePouringService,
-        public localization: LocalizationService) {
+        public localization: LocalizationService
+    ) {
 
         super(null, localization);
     }

@@ -1,4 +1,4 @@
-<ion-content padding class="has-header">
+<ion-content>
 
   <!-- FIXED CONTENT - START -->
   <exacto-pour
@@ -8,20 +8,25 @@
     ></exacto-pour>
 
   <inclination-round-display ion-fixed [active]="isSubscribed"></inclination-round-display>
-  <pour-report-text [stats]="stats"></pour-report-text>
   <!-- FIXED CONTENT - END -->
 
 
-  <button ion-button color="{{isSubscribed ? 'danger' : 'secondary'}}" (click)="toggleAccelerometer()">
+  <button ion-button
+          full
+          large
+          color="{{isSubscribed ? 'failure' : 'primary'}}" (click)="toggleAccelerometer()">
     <ion-icon name="{{isSubscribed ? 'square' : 'play'}}"></ion-icon>
   </button>
 
-  <ul *ngIf="stats">
+  <!--<ul *ngIf="stats">
     <li *ngFor="let item of stats.data"
       [ngStyle]="{ background: item.isCorrectPosition ? 'green' : 'yellow' }">
       {{item.inclination}}
     </li>
   </ul>
 
+  <ion-input type="number" placeholder="qt" [(ngModel)]="quantity"></ion-input>
+  <ion-input type="number" placeholder="qt small" *ngIf="stats" [(ngModel)]="stats.quantity"></ion-input>
+-->
 
 </ion-content>

@@ -1,4 +1,4 @@
-
+import { Measure } from './measure.model';
 
 export class PourTick {
     inclination :number;
@@ -14,7 +14,7 @@ export class PourStats {
     isGoodClosing :boolean;
     totalTime :number;
     quantity :number;
-    quantityText :string;
+    measure :Measure;
     bubbleHappened :boolean;
     wrongPositionTime :number;
     isTotalWrongPosition :boolean;

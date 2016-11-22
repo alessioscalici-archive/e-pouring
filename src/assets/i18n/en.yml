@@ -5,7 +5,19 @@ freePouring:
   goodClosing: Closing ok ({{closingTime}} ms)
   goodOpening: Opening ok ({{openingTime}} ms)
   wrongInclination: Wrong inclination
-  youPoured: You poured {{quantityText}} oz
+  youPoured: You poured {{measure.description}} oz
 pages:
-  main: Bar App
   freePouring: Free pouring
+  main: Bar App
+  pourTest: Pour test
+pourReport:
+  closing: Closing
+  onLine: on line
+  opening: Opening
+  poured: Poured
+  tooSlow: Too slow
+  good: Ok
+pourTestPage:
+  pour: Please pour {{measure}} oz
+  testResults: Test Results
+  welcome: Welcome to the pour test. Take position, and press play to begin!

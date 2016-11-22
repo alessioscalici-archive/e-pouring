@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { MainPage } from '../pages/main/main';
 import { FreePouringPage } from '../pages/free-pouring/free-pouring';
+import { PourTestPage } from '../pages/pour-test/pour-test';
 
 
 @Component({
@@ -42,6 +43,10 @@ export class MyApp {
         {
           title: this.localization.translate('pages.freePouring'),
           component: FreePouringPage
+        },
+        {
+          title: this.localization.translate('pages.pourTest'),
+          component: PourTestPage
         }
       ];
     });

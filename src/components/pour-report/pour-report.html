@@ -1,0 +1,52 @@
+<ion-card>
+
+  <ion-card-content>
+
+    <div>
+      <b>{{test.measure.description}} oz</b>
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col width-33>
+          {{'pourReport.poured'|translate:lang}}
+        </ion-col>
+        <ion-col width-50>
+          <span color="{{ test.isCorrect() ? 'success' : 'failure' }}">
+            {{test.stats.measure.description}} oz
+            <span *ngIf="test.getAccuracy() === 1"> ({{'pourReport.onLine'|translate:lang}})</span>
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col width-33>
+          {{'pourReport.opening'|translate:lang}}
+        </ion-col>
+        <ion-col width-50>
+          <span color="{{ test.stats.isGoodOpening ? 'success' : 'warning' }}">
+            {{(test.stats.isGoodOpening ? 'pourReport.good' : 'pourReport.tooSlow') | translate:lang}}
+            ({{test.stats.openingTime}} ms)
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col width-33>
+          {{'pourReport.closing'|translate:lang}}
+        </ion-col>
+        <ion-col width-50>
+          <span color="{{ test.stats.isGoodClosing ? 'success' : 'warning' }}">
+            {{(test.stats.isGoodClosing ? 'pourReport.good' : 'pourReport.tooSlow') | translate:lang}}
+            ({{test.stats.closingTime}} ms)
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <exacto-pour
+      [ngClass]="{ correct: test.isCorrect() }"
+      [quantity]="test.stats.quantity">
+    </exacto-pour>
+
+  </ion-card-content>
+
+</ion-card>

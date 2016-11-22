@@ -5,6 +5,15 @@ inclination-round-display {
   $circle-radius-no-border: ($circle-diameter / 2 - $border-width);
   $line-rotation: 0.5235987755982988rad;
 
+  $color-border-normal: #808080;
+  $color-border-correct: darken(app-color(success), 0%);
+  $color-border-wrong: darken(app-color(warning), 0%);
+
+  $color-bg-normal: rgba($color-border-normal, .1);
+  $color-bg-correct: rgba($color-border-correct, .1);
+  $color-bg-wrong: rgba($color-border-wrong, .1);
+
+
 
   .circle {
     position: relative;
@@ -12,16 +21,16 @@ inclination-round-display {
     height: $circle-diameter;
     border-radius: 100%;
     overflow: hidden;
-    border: $border-width solid grey;
-    background: rgba(0, 0, 0, 0.1);
+    border: $border-width solid $color-border-normal;
+    background: $color-bg-normal;
 
     &.correct-inclination {
-      border-color: green;
-      background: rgba(0, 255, 0, 0.1);
+      border-color: $color-border-correct;
+      background: $color-bg-correct;
     }
     &.wrong-inclination {
-      border-color: red;
-      background: rgba(255, 0, 0, 0.1);
+      border-color: $color-border-wrong;
+      background: $color-bg-wrong;
     }
 
     &.left-hand {
@@ -39,7 +48,7 @@ inclination-round-display {
     position: absolute;
     width: 1px;
     height: 100%;
-    background: #ff0000;
+    background: app-color(info);
     left: 50%;
     top: $circle-radius-no-border;
     transform-origin: top;
@@ -49,7 +58,7 @@ inclination-round-display {
     position: absolute;
     width: 1px;
     height: $circle-radius-no-border;
-    background: #333333;
+    background: #999;
     left: $circle-radius-no-border;
     transform-origin: bottom;
 
@@ -65,7 +74,7 @@ inclination-round-display {
     position: absolute;
     width: 1px;
     height: 100%;
-    background: #666666;
+    background: #ccc;
     left: $circle-radius-no-border;
   }
 
@@ -73,7 +82,7 @@ inclination-round-display {
     position: absolute;
     width: 100%;
     height: 1px;
-    background: #666666;
+    background: #ccc;
     top: $circle-radius-no-border;
   }
 

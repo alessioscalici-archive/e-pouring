@@ -7,5 +7,17 @@ freePouring:
   wrongInclination: Inclinazione sbagliata
   youPoured: Hai versato {{quantityText}} oz
 pages:
-  main: Bar App
   freePouring: Free pouring
+  main: Bar App
+  pourTest: Pour test
+pourReport:
+  closing: Chiusura
+  onLine: on line
+  opening: Apertura
+  poured: Versati
+  tooSlow: Lenta
+  good: Ok
+pourTestPage:
+  pour: Versa {{measure}} oz
+  testResults: Risultati
+  welcome: Benvenuto al pour test. Mettiti in posizione, e premi play per cominciare!

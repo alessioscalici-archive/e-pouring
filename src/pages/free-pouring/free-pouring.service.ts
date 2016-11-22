@@ -3,6 +3,7 @@ import { DeviceMotion } from 'ionic-native';
 import { Subscription } from 'rxjs/Subscription'
 import { AccelerationData } from 'ionic-native';
 
+import { Measure } from '../../models/measure.model';
 import { PourStats } from '../../models/pour-stats.model';
 import { AppConfig } from '../../app/app-config.service';
 
@@ -119,8 +120,7 @@ export class FreePouringService {
        // let quantityIndex = Math.round(quantityTime / AppConfig.pouring.ozQuarterDuration);
         let quantityIndex = Math.max(0, Math.round(quantityTime / AppConfig.pouring.ozQuarterDuration) - 1);
 
-        let quantityLabels = ['1/4', '1/2', '3/4', '1', '1 1/4', '1 1/2', '1 3/4', '2'];
-        let quantityText = quantityIndex < quantityLabels.length ? quantityLabels[quantityIndex] : '> 2 oz';
+        let measure = quantityIndex < Measure.list.length ? Measure.list[quantityIndex] : Measure.moreThan2oz;
 
         let stats = {
             data: dataArray,
@@ -130,7 +130,7 @@ export class FreePouringService {
             isGoodClosing: isGoodClosing,
             totalTime: quantityTime,
             quantity: quantity,
-            quantityText: quantityText,
+            measure: measure,
             bubbleHappened: isGoodOpening,
             wrongPositionTime: wrongPositionTime,
             isTotalWrongPosition: wrongPositionTicks === dataArray.length

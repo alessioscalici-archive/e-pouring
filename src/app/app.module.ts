@@ -5,19 +5,22 @@ import { LocaleModule, LocalizationModule } from 'angular2localization';
 import { MyApp } from './app.component';
 import { MainPage } from '../pages/main/main';
 import { FreePouringPage } from '../pages/free-pouring/free-pouring';
+import { PourTestPage } from '../pages/pour-test/pour-test';
 
 import { ExactoPour } from '../components/exacto-pour/exacto-pour';
 import { InclinationRoundDisplay } from '../components/inclination-round-display/inclination-round-display';
-import { PourReportText } from '../components/pour-report-text/pour-report-text';
+import { PourReport } from '../components/pour-report/pour-report';
+
 
 @NgModule({
   declarations: [
     MyApp,
     MainPage,
     FreePouringPage,
+    PourTestPage,
     ExactoPour,
     InclinationRoundDisplay,
-    PourReportText
+    PourReport
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -28,7 +31,8 @@ import { PourReportText } from '../components/pour-report-text/pour-report-text'
   entryComponents: [
     MyApp,
     MainPage,
-    FreePouringPage
+    FreePouringPage,
+    PourTestPage
   ],
   providers: []
 })

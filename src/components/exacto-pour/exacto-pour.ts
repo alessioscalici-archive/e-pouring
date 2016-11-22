@@ -1,6 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {List, Item} from 'ionic/ionic';
 
+import { Measure } from '../../models/measure.model';
+
 @Component({
     selector: 'exacto-pour',
     templateUrl: 'exacto-pour.html'
@@ -9,11 +11,11 @@ export class ExactoPour {
 
     @Input() quantity: number;
 
-    measures: Array<string>;
+    measures: Array<Measure>;
 
     constructor() {
 
-        this.measures = ['1/4', '1/2', '3/4', '1', '1 1/4', '1 1/2', '1 3/4', '2'].reverse();
+        this.measures = Measure.list.slice().reverse();
     }
 
     getPercent() {

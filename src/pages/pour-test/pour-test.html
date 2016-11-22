@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{'pages.main'|translate:lang}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div *ngIf="testPhase==='TO_BEGIN'">
+
+    <ion-card padding>
+      {{'pourTestPage.welcome'|translate:lang}}
+    </ion-card>
+
+    <button ion-button color="primary" (click)="startTest()">
+      <ion-icon name="play"></ion-icon>
+    </button>
+
+  </div>
+
+  <div *ngIf="testPhase==='ONGOING'">
+
+    <inclination-round-display
+      [active]="!!currentTest"
+      ></inclination-round-display>
+
+    <div>
+      {{'pourTestPage.pour'|translate:lang:{measure: currentTest.measure.description} }}
+    </div>
+
+    <hr/>
+
+    <div class="test-list">
+      <div class="test-item" *ngFor="let item of testList">
+        <span class="descr">{{item.measure.description}}</span>
+        <ion-icon name="checkmark" *ngIf="item.isDone()"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="testPhase==='ENDED'">
+    <h1>{{'pourTestPage.testResults'|translate:lang}}</h1>
+    <div *ngFor="let test of testList">
+      <pour-report
+        *ngIf="test.isDone()"
+        [test]="test">
+      </pour-report>
+    </div>
+  </div>
+
+
+
+</ion-content>

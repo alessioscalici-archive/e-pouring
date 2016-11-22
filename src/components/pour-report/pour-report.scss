@@ -1,0 +1,24 @@
+pour-report {
+
+  ion-card {
+    position: relative;
+    min-height: 160px;
+
+    exacto-pour {
+      position: absolute;
+      width: 30px;
+      right: 0;
+      font-size: .5em;
+
+      .liquid {
+        background: app-color(failure);
+      }
+
+      &.correct .liquid {
+        background: app-color(success);
+      }
+    }
+  }
+
+
+}
