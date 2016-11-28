@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { DeviceMotion, AccelerationData } from 'ionic-native';
 import { Subscription } from 'rxjs/Subscription';
 
+import { Platform } from 'ionic-angular';
+import { Insomnia } from 'ionic-native';
+
 import { Locale, LocalizationService } from 'angular2localization';
 
 import { FreePouringService } from './free-pouring.service';
@@ -24,11 +27,26 @@ export class FreePouringPage extends Locale {
 
 
     constructor(
+        private platform: Platform,
         private freePouringService: FreePouringService,
         public localization: LocalizationService
     ) {
 
         super(null, localization);
+    }
+
+
+
+    ngOnInit() {
+        this.platform.ready().then(() => {
+            Insomnia.keepAwake();
+        });
+    }
+
+    ngOnDestroy() {
+        this.platform.ready().then(() => {
+            Insomnia.allowSleepAgain();
+        });
     }
 
 

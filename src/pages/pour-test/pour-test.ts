@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
+import { Platform } from 'ionic-angular';
+import { Insomnia } from 'ionic-native';
+
 import { Locale, LocalizationService } from 'angular2localization';
 
 import { Measure } from '../../models/measure.model';
@@ -24,6 +27,7 @@ export class PourTestPage extends Locale {
 
 
   constructor(
+      public platform: Platform,
       public localization: LocalizationService,
       public freePouringService: FreePouringService
   ) {
@@ -43,6 +47,20 @@ export class PourTestPage extends Locale {
     this.freePouringService.toggleAccelerometer();
 
     this.testPhase = 'TO_BEGIN';
+
+
+  }
+
+  ngOnInit() {
+    this.platform.ready().then(() => {
+      Insomnia.keepAwake();
+    });
+  }
+
+  ngOnDestroy() {
+    this.platform.ready().then(() => {
+      Insomnia.allowSleepAgain();
+    });
   }
 
 
