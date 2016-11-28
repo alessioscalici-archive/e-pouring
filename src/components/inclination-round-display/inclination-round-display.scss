@@ -2,7 +2,7 @@ inclination-round-display {
 
   $circle-diameter: 200px;
   $border-width: 3px;
-  $circle-radius-no-border: ($circle-diameter / 2 - $border-width);
+  $circle-radius-no-border: ($circle-diameter / 2 - $border-width - 1);
   $line-rotation: 0.5235987755982988rad;
 
   $color-border-normal: #808080;
@@ -46,17 +46,17 @@ inclination-round-display {
 
   .bottle-line {
     position: absolute;
-    width: 1px;
+    width: 2px;
     height: 100%;
     background: app-color(info);
-    left: 50%;
+    left: $circle-radius-no-border;
     top: $circle-radius-no-border;
     transform-origin: top;
   }
 
   .inclination-limit-line {
     position: absolute;
-    width: 1px;
+    width: 2px;
     height: $circle-radius-no-border;
     background: #999;
     left: $circle-radius-no-border;
@@ -72,7 +72,7 @@ inclination-round-display {
 
   .central-line {
     position: absolute;
-    width: 1px;
+    width: 2px;
     height: 100%;
     background: #ccc;
     left: $circle-radius-no-border;
@@ -81,7 +81,7 @@ inclination-round-display {
   .horizontal-line {
     position: absolute;
     width: 100%;
-    height: 1px;
+    height: 2px;
     background: #ccc;
     top: $circle-radius-no-border;
   }
