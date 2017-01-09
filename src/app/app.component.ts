@@ -9,6 +9,7 @@ import { MainPage } from '../pages/main/main';
 import { FreePouringPage } from '../pages/free-pouring/free-pouring';
 import { PourTestPage } from '../pages/pour-test/pour-test';
 
+import { Db } from '../services/Db.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,11 +25,13 @@ export class MyApp {
     public platform: Platform,
     public menu: MenuController,
     public locale: LocaleService,
-    public localization: LocalizationService
+    public localization: LocalizationService,
+    public db: Db
   ) {
     this.initializeApp();
     this.initializePages();
     this.initializeTranslation();
+    this.initializeDb();
   }
 
 
@@ -84,6 +87,12 @@ export class MyApp {
       let lang = (navigator.language && navigator.language.split('-')[0]) || 'en';
       this.locale.setCurrentLanguage(lang);
 
+    });
+  }
+
+  initializeDb() {
+    this.platform.ready().then(() => {
+      this.db.init();
     });
   }
 

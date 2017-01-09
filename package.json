@@ -46,7 +46,8 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
     "cordova-plugin-device-motion",
-    "cordova-plugin-insomnia"
+    "cordova-plugin-insomnia",
+    "cordova-plugin-sqlite-2"
   ],
   "cordovaPlatforms": []
 }

@@ -11,6 +11,8 @@ import { ExactoPour } from '../components/exacto-pour/exacto-pour';
 import { InclinationRoundDisplay } from '../components/inclination-round-display/inclination-round-display';
 import { PourReport } from '../components/pour-report/pour-report';
 
+import { Db } from '../services/Db.service';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { PourReport } from '../components/pour-report/pour-report';
     FreePouringPage,
     PourTestPage
   ],
-  providers: []
+  providers: [
+    Db
+  ]
 })
 export class AppModule {}
