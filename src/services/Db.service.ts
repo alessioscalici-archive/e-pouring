@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { SqlDetails } from '../models/sql-data.model';
 import { Measure } from '../models/measure.model';
+import { PourTestSuite } from '../models/pour-test-suite.model';
 
 declare var sqlitePlugin;
 
@@ -19,9 +20,39 @@ export class Db {
       throw new Error('Impossible to init db');
     }
 
-    this.executeSql(this.getCreateSql(Measure.sqlData), {});
+
+    // date works as sort of ID
+    this.executeSql('CREATE TABLE IF NOT EXISTS pour_test (date TEXT, measure INTEGER, pour TEXT)');
 
   }
+
+  public savePourTestSuite(suite: PourTestSuite) {
+
+    if (!suite.isDone()) {
+      throw new Error('Suite must be done to be saved');
+    }
+    let dateString = JSON.stringify(suite.date);
+
+    let promiseArray = [];
+    suite.testList.forEach((test) => {
+      let promise = this.executeSql(
+        'INSERT INTO pour_test (date, measure, pour) VALUES (?,?,?)',
+        [dateString, test.measure.toJson(), test.stats.toJson()]
+      );
+      promiseArray.push(promise);
+    });
+
+    return Promise.all(promiseArray);
+  }
+
+  public queryPourTestSuites() {
+    return this.executeSql('SELECT * FROM pour_test')
+      .then((res) => {
+        console.log('SELECT * FROM pour_test' , res);
+      });
+  }
+
+
 
   public getCreateSql(sqlData: SqlDetails) : string {
     let sql = 'CREATE TABLE ' + sqlData.table;
@@ -40,7 +71,8 @@ export class Db {
     console.log('executing: ' + query);
     return new Promise((resolve, reject) => {
       if (!this.db) {
-        return reject('Database is not open!');
+        this.db = sqlitePlugin.openDatabase('data.db');
+        //return reject('Database is not open!');
       }
       this.db.transaction(function (txn) {
         txn.executeSql(query, params, function (tx, res) {
