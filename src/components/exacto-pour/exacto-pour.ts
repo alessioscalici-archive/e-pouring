@@ -15,7 +15,7 @@ export class ExactoPour {
 
     constructor() {
 
-        this.measures = Measure.list.slice().reverse();
+        this.measures = Measure.getExactoPourList().reverse();
     }
 
     getPercent() {

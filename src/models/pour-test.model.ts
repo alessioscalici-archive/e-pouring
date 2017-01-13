@@ -43,4 +43,23 @@ export class PourTest {
         return (this.stats.measure === this.measure);
     }
 
+    toJson(): Object {
+        let obj = {
+            measure: this.measure.toJson(),
+            stats: this.stats ? this.stats.toJson() : null
+        };
+        return obj;
+    }
+
+    static fromJson(json) : PourTest {
+        let measure = Measure.fromJson(json.measure);
+        let instance = new PourTest(measure);
+        instance.stats = PourStats.fromJson(json.stats);
+        return instance;
+    }
+
+    static arrayFromJson(json) : Array<PourTest> {
+        return json.map(PourTest.fromJson);
+    }
+
 }

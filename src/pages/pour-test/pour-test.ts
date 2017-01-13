@@ -8,6 +8,7 @@ import { Locale, LocalizationService } from 'angular2localization';
 
 import { Measure } from '../../models/measure.model';
 import { PourTest } from '../../models/pour-test.model';
+import { PourTestSuite } from '../../models/pour-test-suite.model';
 import { FreePouringService } from '../free-pouring/free-pouring.service';
 
 @Component({
@@ -23,6 +24,7 @@ export class PourTestPage extends Locale {
   currentIndex: number = 0;
   currentTest: PourTest;
   testPhase: string;
+  testSuite: PourTestSuite;
 
 
 
@@ -34,15 +36,8 @@ export class PourTestPage extends Locale {
     super(null, localization);
 
 
-    this.testList = [
-      new PourTest(Measure.list[4]),
-      new PourTest(Measure.list[1]),
-      new PourTest(Measure.list[2]),
-      new PourTest(Measure.list[5]),
-      new PourTest(Measure.list[3]),
-      new PourTest(Measure.list[0]),
-      new PourTest(Measure.list[7])
-    ];
+    this.testSuite = new PourTestSuite();
+    this.testList = this.testSuite.testList;
 
     this.freePouringService.toggleAccelerometer();
 
@@ -87,7 +82,6 @@ export class PourTestPage extends Locale {
 
       // set the test as done
       this.currentTest.stats = stats;
-     // alert(this.currentIndex + '- Accuracy: ' + this.currentTest.getAccuracy());
 
 
       if (this.isLastTest()) {
