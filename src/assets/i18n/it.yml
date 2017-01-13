@@ -10,6 +10,8 @@ pages:
   freePouring: Free pouring
   main: Bar App
   pourTest: Pour test
+  pourTestResult: Risultati pour test
+  pourTestHistory: Storico pour test
 pourReport:
   closing: Chiusura
   onLine: on line
@@ -19,7 +21,6 @@ pourReport:
   good: Ok
 pourTestPage:
   pour: Versa {{measure}} oz
-  testResults: Risultati
   welcome: >
            Benvenuto al pour test.
            Dovrai versare la quantità richiesta, per 7 volte.

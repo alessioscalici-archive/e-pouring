@@ -10,6 +10,8 @@ pages:
   freePouring: Free pouring
   main: Bar App
   pourTest: Pour test
+  pourTestResult: Pour test results
+  pourTestHistory: Pour test history
 pourReport:
   closing: Closing
   onLine: on line
@@ -19,7 +21,6 @@ pourReport:
   good: Ok
 pourTestPage:
   pour: Please pour {{measure}} oz
-  testResults: Test Results
   welcome: >
            Welcome to the pour test.
            You'll be asked to pour a specific quantity for 7 times.

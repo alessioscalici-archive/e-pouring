@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{'pages.pourTestResult'|translate:lang}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div *ngFor="let test of testSuite.testList">
+    <pour-report
+      *ngIf="test.isDone()"
+      [test]="test">
+    </pour-report>
+  </div>
+
+</ion-content>

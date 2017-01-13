@@ -20,6 +20,7 @@ export class Db {
       throw new Error('Impossible to init db');
     }
 
+    this.executeSql('CREATE TABLE IF NOT EXISTS pour_test (date TEXT, measure INTEGER, pour TEXT)');
 
     // date works as sort of ID
     this.executeSql('CREATE TABLE IF NOT EXISTS pour_test (date TEXT, measure INTEGER, pour TEXT)');

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{'pages.pourTestHistory'|translate:lang}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+
+  <div *ngFor="let suite of list">
+    <div
+      class="list-item {{getSuccessClass(suite)}}"
+      (click)="openTestSuite(suite)">
+      {{suite.date | date: 'dd/MM/yyyy'}}
+    </div>
+  </div>
+
+</ion-content>
