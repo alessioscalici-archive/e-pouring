@@ -25,6 +25,16 @@ export class PourTestSuite {
         ];
     }
 
+    getSuccessPercent() :number {
+        let count = 0;
+        this.testList.forEach((test) => {
+            if (test.isDone() && test.isCorrect()) {
+                ++count;
+            }
+        });
+        return count / this.testList.length * 100;
+    }
+
 
 
     isDone() : boolean {

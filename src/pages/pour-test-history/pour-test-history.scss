@@ -1,0 +1,20 @@
+pour-test-history-page {
+
+  .list-item {
+    height: 60px;
+    line-height: 60px;
+    background: blueviolet;
+    border: 1px solid #ccc;
+    color: white;
+
+    &.bad {
+      background: app-color(failure);
+    }
+    &.average {
+      background: app-color(warning);
+    }
+    &.good {
+      background: app-color(success);
+    }
+  }
+}

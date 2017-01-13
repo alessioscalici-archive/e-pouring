@@ -1,0 +1,23 @@
+pour-test-result-page {
+
+  h1 {
+    font-family: 'Pacifico', monospace;
+  }
+
+  .test-list {
+    .test-item {
+      position: relative;
+      border-bottom: 1px dotted #000000;
+      .descr {
+        display: inline-block;
+        width: 100%;
+      }
+      ion-icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+
+}

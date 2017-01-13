@@ -6,6 +6,8 @@ import { MyApp } from './app.component';
 import { MainPage } from '../pages/main/main';
 import { FreePouringPage } from '../pages/free-pouring/free-pouring';
 import { PourTestPage } from '../pages/pour-test/pour-test';
+import { PourTestResultPage } from '../pages/pour-test-result/pour-test-result';
+import { PourTestHistoryPage } from '../pages/pour-test-history/pour-test-history';
 
 import { ExactoPour } from '../components/exacto-pour/exacto-pour';
 import { InclinationRoundDisplay } from '../components/inclination-round-display/inclination-round-display';
@@ -18,6 +20,8 @@ import { PourReport } from '../components/pour-report/pour-report';
     MainPage,
     FreePouringPage,
     PourTestPage,
+    PourTestResultPage,
+    PourTestHistoryPage,
     ExactoPour,
     InclinationRoundDisplay,
     PourReport
@@ -32,7 +36,9 @@ import { PourReport } from '../components/pour-report/pour-report';
     MyApp,
     MainPage,
     FreePouringPage,
-    PourTestPage
+    PourTestPage,
+    PourTestResultPage,
+    PourTestHistoryPage
   ],
   providers: []
 })

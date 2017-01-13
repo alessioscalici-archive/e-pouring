@@ -50,16 +50,4 @@
   </div>
 
 
-  <div *ngIf="testPhase==='ENDED'">
-    <h1>{{'pourTestPage.testResults'|translate:lang}}</h1>
-    <div *ngFor="let test of testList">
-      <pour-report
-        *ngIf="test.isDone()"
-        [test]="test">
-      </pour-report>
-    </div>
-  </div>
-
-
-
 </ion-content>

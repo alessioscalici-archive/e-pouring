@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Rx';
 import { MainPage } from '../pages/main/main';
 import { FreePouringPage } from '../pages/free-pouring/free-pouring';
 import { PourTestPage } from '../pages/pour-test/pour-test';
+import { PourTestHistoryPage } from '../pages/pour-test-history/pour-test-history';
 
 
 @Component({
@@ -47,6 +48,10 @@ export class MyApp {
         {
           title: this.localization.translate('pages.pourTest'),
           component: PourTestPage
+        },
+        {
+          title: this.localization.translate('pages.pourTestHistory'),
+          component: PourTestHistoryPage
         }
       ];
     });

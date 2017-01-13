@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Platform } from 'ionic-angular';
+import { Platform, NavController } from 'ionic-angular';
 import { Insomnia } from 'ionic-native';
 
 import { Locale, LocalizationService } from 'angular2localization';
@@ -11,10 +11,15 @@ import { PourTest } from '../../models/pour-test.model';
 import { PourTestSuite } from '../../models/pour-test-suite.model';
 import { FreePouringService } from '../free-pouring/free-pouring.service';
 
+import { StorageService } from '../../services/storage.service';
+
+import { PourTestResultPage } from '../pour-test-result/pour-test-result';
+import { MainPage } from '../main/main';
+
 @Component({
   selector: 'pour-test-page',
   templateUrl: 'pour-test.html',
-  providers: [FreePouringService]
+  providers: [FreePouringService, StorageService]
 })
 export class PourTestPage extends Locale {
 
@@ -30,8 +35,10 @@ export class PourTestPage extends Locale {
 
   constructor(
       public platform: Platform,
+      public navCtrl: NavController,
       public localization: LocalizationService,
-      public freePouringService: FreePouringService
+      public freePouringService: FreePouringService,
+      public storage: StorageService
   ) {
     super(null, localization);
 
@@ -70,6 +77,12 @@ export class PourTestPage extends Locale {
     }
   }
 
+  private gotoResultsPage() :void {
+    this.navCtrl.setRoot(MainPage);
+    this.navCtrl.push(PourTestResultPage, {
+      testSuite: this.testSuite
+    });
+  }
 
 
   startTest() {
@@ -89,6 +102,11 @@ export class PourTestPage extends Locale {
         this.stopPouringSub.unsubscribe();
         this.currentIndex = 0;
         this.currentTest = null;
+
+        this.storage.addPourTest(this.testSuite);
+
+        this.gotoResultsPage();
+
       } else {
         this.goToNextTest();
       }
