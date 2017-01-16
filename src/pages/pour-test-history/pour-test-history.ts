@@ -28,7 +28,10 @@ export class PourTestHistoryPage extends Locale {
     super(null, localization);
 
 
-    this.list = this.storage.getPourTests().reverse();
+    this.storage.getPourTests()
+      .then((testList) => {
+        this.list = testList;
+      });
 
   }
 

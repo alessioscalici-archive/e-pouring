@@ -54,7 +54,7 @@ export class PourTest {
     static fromJson(json) : PourTest {
         let measure = Measure.fromJson(json.measure);
         let instance = new PourTest(measure);
-        instance.stats = PourStats.fromJson(json.stats);
+        instance.stats = PourStats.fromJson(json.pour);
         return instance;
     }
 

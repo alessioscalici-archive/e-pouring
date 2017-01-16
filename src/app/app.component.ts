@@ -10,10 +10,11 @@ import { FreePouringPage } from '../pages/free-pouring/free-pouring';
 import { PourTestPage } from '../pages/pour-test/pour-test';
 import { PourTestHistoryPage } from '../pages/pour-test-history/pour-test-history';
 
-import { Db } from '../services/Db.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [StorageService]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -27,7 +28,7 @@ export class MyApp {
     public menu: MenuController,
     public locale: LocaleService,
     public localization: LocalizationService,
-    public db: Db
+    public storage: StorageService
   ) {
     this.initializeApp();
     this.initializePages();
@@ -97,7 +98,9 @@ export class MyApp {
 
   initializeDb() {
     this.platform.ready().then(() => {
-      this.db.init();
+      this.storage.clear().then(()=>{
+        this.storage.init();
+      });
     });
   }
 
