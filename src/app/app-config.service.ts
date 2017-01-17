@@ -9,7 +9,6 @@ export class AppConfig {
        tickFrequency: 50,
        bubbleDuration: 50,
        ozQuarterDuration: 350,
-       maximumCorrectInclination: -6.5,
 
        inclination: {
 
@@ -22,7 +21,7 @@ export class AppConfig {
                max: 2.6179938779914943  // ~ PI - PI / 6 ( 5 quarters)
            },
            correct: {
-               min: 2.6179938779914944, // PI / 2 ( 1 quarter )
+               min: 2.6179938779914944, // ~ PI - PI / 6 ( 5 quarters)
                max: 3.141592653589793   // PI ( 6 quarters)
            }
        }

@@ -1,11 +1,10 @@
 freePouring:
-  badClosing: Chiusura troppo lenta ({{closingTime}} ms)
-  badOpening: Apertura troppo lenta ({{openingTime}} ms)
-  bubbleHappened: Bubble avvenuto
-  goodClosing: Chiusura ok ({{closingTime}} ms)
-  goodOpening: Apertura ok ({{openingTime}} ms)
-  wrongInclination: Inclinazione sbagliata
-  youPoured: Hai versato {{quantityText}} oz
+  closing: Chiusura
+  good: Ok
+  onLine: on line
+  opening: Apertura
+  poured: Versati
+  tooSlow: Lenta
 pages:
   freePouring: Free pouring
   main: Bar App
@@ -14,11 +13,11 @@ pages:
   pourTestHistory: Storico pour test
 pourReport:
   closing: Chiusura
+  good: Ok
   onLine: on line
   opening: Apertura
   poured: Versati
   tooSlow: Lenta
-  good: Ok
 pourTestPage:
   pour: Versa {{measure}} oz
   welcome: >

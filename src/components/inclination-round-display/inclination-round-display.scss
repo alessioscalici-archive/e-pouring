@@ -1,8 +1,8 @@
 inclination-round-display {
 
-  $circle-diameter: 200px;
+  $circle-diameter: 50vw;
   $border-width: 3px;
-  $circle-radius-no-border: ($circle-diameter / 2 - $border-width - 1);
+  $circle-radius-no-border: calc(#{$circle-diameter} / 2 - #{$border-width} - 1px);
   $line-rotation: 0.5235987755982988rad;
 
   $color-border-normal: #808080;

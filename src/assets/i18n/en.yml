@@ -1,11 +1,9 @@
 freePouring:
-  badClosing: Closing too slow ({{closingTime}} ms)
-  badOpening: Opening too slow ({{openingTime}} ms)
-  bubbleHappened: Bubble happened
-  goodClosing: Closing ok ({{closingTime}} ms)
-  goodOpening: Opening ok ({{openingTime}} ms)
-  wrongInclination: Wrong inclination
-  youPoured: You poured {{measure.description}} oz
+  closing: Closing
+  good: Ok
+  opening: Opening
+  poured: Poured
+  tooSlow: Too slow
 pages:
   freePouring: Free pouring
   main: Bar App
@@ -14,11 +12,11 @@ pages:
   pourTestHistory: Pour test history
 pourReport:
   closing: Closing
+  good: Ok
   onLine: on line
   opening: Opening
   poured: Poured
   tooSlow: Too slow
-  good: Ok
 pourTestPage:
   pour: Please pour {{measure}} oz
   welcome: >

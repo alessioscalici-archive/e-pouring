@@ -59,44 +59,22 @@ export class FreePouringPage extends Locale {
             this.stopPouringSub.unsubscribe();
         } else {
             this.isSubscribed = true;
-
+            this.quantity = 0;
+            this.stats = null;
 
             this.startPouringSub = this.freePouringService.watchStartPouring().subscribe(() => {
 
                 this.isPouring = true;
                 this.quantity = 0;
-
+                this.stats = null;
             });
 
             this.stopPouringSub = this.freePouringService.watchStopPouring().subscribe((stats) => {
 
                 this.stats = stats;
                 this.isPouring = false;
-
-                let text = '';
-
-                // never been in right position
-                if (stats.isTotalWrongPosition) {
-                    text += this.localization.translate('freePouring.youPoured', stats) + '\n';
-                    text += this.localization.translate('freePouring.wrongInclination') + '\n';
-                } else {
-
-                    text += this.localization.translate('freePouring.youPoured', stats) + '\n';
-                    text += this.localization.translate(
-                            stats.isGoodOpening ? 'freePouring.goodOpening' : 'freePouring.badOpening',
-                            stats) + '\n';
-                    text += this.localization.translate(
-                            stats.isGoodClosing ? 'freePouring.goodClosing' : 'freePouring.badClosing',
-                            stats) + '\n';
-
-                    text += stats.bubbleHappened ?
-                    this.localization.translate('freePouring.bubbleHappened') + '\n' :
-                        '';
-                }
-
                 this.quantity = stats.quantity;
 
-                alert(text);
             });
         }
 
