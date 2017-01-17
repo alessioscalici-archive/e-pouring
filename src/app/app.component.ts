@@ -98,9 +98,9 @@ export class MyApp {
 
   initializeDb() {
     this.platform.ready().then(() => {
-      this.storage.clear().then(()=>{
+     // this.storage.clear().then(()=>{
         this.storage.init();
-      });
+     // });
     });
   }
 

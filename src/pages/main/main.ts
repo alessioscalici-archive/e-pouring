@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuController, NavController } from 'ionic-angular';
 
 import { Locale, LocalizationService } from 'angular2localization';
 

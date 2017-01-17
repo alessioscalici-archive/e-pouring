@@ -39,7 +39,7 @@ export class StorageService {
 				for (let i=0; i<res.rows.length; ++i) {
 					array.push(res.rows.item(i));
 				}
-				var grouped = groupBy(res.rows, 'date');
+				var grouped = groupBy(array, 'date');
 				let testSuites = [];
 				forEach(grouped, (v, k) => {
 					let suiteJson = {

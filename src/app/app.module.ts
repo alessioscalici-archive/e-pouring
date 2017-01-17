@@ -14,6 +14,7 @@ import { InclinationRoundDisplay } from '../components/inclination-round-display
 import { PourReport } from '../components/pour-report/pour-report';
 
 import { Db } from '../services/Db.service';
+import { StorageService } from '../services/storage.service'
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { Db } from '../services/Db.service';
     PourTestHistoryPage
   ],
   providers: [
-    Db
+    Db,
+    StorageService
   ]
 })
 export class AppModule {}

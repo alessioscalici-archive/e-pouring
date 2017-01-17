@@ -14,7 +14,6 @@ import { FreePouringService } from '../free-pouring/free-pouring.service';
 import { StorageService } from '../../services/storage.service';
 
 import { PourTestResultPage } from '../pour-test-result/pour-test-result';
-import { MainPage } from '../main/main';
 
 @Component({
   selector: 'pour-test-page',
@@ -78,7 +77,7 @@ export class PourTestPage extends Locale {
   }
 
   private gotoResultsPage() :void {
-    this.navCtrl.setRoot(MainPage);
+    this.navCtrl.pop();
     this.navCtrl.push(PourTestResultPage, {
       testSuite: this.testSuite
     });
